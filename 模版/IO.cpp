@@ -130,7 +130,7 @@ public:
     void newline() {
         putchar('\n');
     }
-};
+}io;
 
 int main() {
     IO io;
