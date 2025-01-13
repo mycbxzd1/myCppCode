@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
+typedef long long ll;
 class IO {
 private:
     void _read(int &x) {
@@ -85,35 +85,46 @@ public:
         putchar('\n');
     }
 } io;
+const int N=1005,INF=0x3f3f3f3f,mod=1e9+7;
+int n,m,a[N],b[N],c[N],f[N][N];
+void add(int x,int y){
+    while(x<=n+1){
+        c[x]=(c[x]+y)%mod;
+        x+=x&-x;
+    }
+}
 
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
+int ask(int x){
+    int ans=0;
+    while(x){
+        ans=(ans+c[x])%mod;
+        x-=x&-x;
+    }
+    return ans;
+}
+int num=0;
+int main(){
+    int T;io.read(T);
+    while(T--){
+        
+        io.read(n,m);
+        for(int i=1;i<=n;i++)io.read(a[i]);
+        memcpy(b,a,sizeof(a));
+        sort(b+1,b+n+1);
+        for(int i=1;i<=n;i++)a[i]=lower_bound(b+1,b+n+1,a[i])-b+1;
+        memset(f,0,sizeof(f));
+        f[0][0]=1;
+        for(int i=1;i<=m;i++){
+            memset(c,0,sizeof(c));
+            add(1,f[i-1][0]);
+            for(int j=1;j<=n;j++){
+                f[i][j]=ask(a[j]-1);
+                add(a[j],f[i-1][j]);
+            }
+        }
+        int ans=0;
+        for(int i=1;i<=n;i++)ans=(ans+f[m][i])%mod;
+        io.write("Case #",++num,": ",ans,"\n");
+    }
     return 0;
 }
