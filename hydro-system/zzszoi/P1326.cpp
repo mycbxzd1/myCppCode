@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
+typedef long long ll;
 class IO {
 private:
     void _read(int &x) {
@@ -80,36 +80,29 @@ public:
         putchar('\n');
     }
 } io;
-
-
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
+const int N=1e5+5,INF=0x3f3f3f3f;
+bool f[N];int prime[N],n,cnt;
+void calc(){
+    memset(f,0,sizeof(f));
+    f[0]=f[1]=1;
+    for(int i=2;i<=n;i++){
+        if(!f[i])prime[++cnt]=i;
+        for(int j=1;j<=cnt&&prime[j]*i<=n;j++){
+            f[prime[j]*i]=1;
+            if(i%prime[j]==0)break;
+        }
+    }
+}
+int main(){
     io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
+    calc();
+    for(int i=1;i<=cnt;i++){
+        int sum=0;
+        for(int j=1;j*prime[i]<=n;j++){
+            sum+=n/(j*prime[i]);
+        }
+        io.write(prime[i]," ",sum);
+        io.newline();
+    }
     return 0;
 }

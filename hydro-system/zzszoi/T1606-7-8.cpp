@@ -1,9 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 class IO {
 private:
     void _read(int &x) {
+        x=0;char ch=getchar();bool f=0;
+        while(ch<'0'||ch>'9'){
+            if(ch=='-')f=1;
+            ch=getchar();
+        }
+        while(ch>='0'&&ch<='9'){
+            x=(x<<3)+(x<<1)+(ch^48);
+            ch=getchar();
+        }
+        if(f)x=-x;
+    }
+    void _read(long long &x) {
         x=0;char ch=getchar();bool f=0;
         while(ch<'0'||ch>'9'){
             if(ch=='-')f=1;
@@ -80,36 +91,41 @@ public:
         putchar('\n');
     }
 } io;
-
-
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
+const int MAXN = 1000005;
+long long f[MAXN], sumT[MAXN], sumC[MAXN], s, q[MAXN], n;
+int search(long long k, int l, int r)
+{
+    int L = l, R = r;
+    while (L < R)
+    {
+        int mid = (L + R) >> 1;
+        if ((f[q[mid + 1]] - f[q[mid]]) <= k * (sumC[q[mid + 1]] - sumC[q[mid]]))
+            L = mid + 1;
+        else
+            R = mid;
+    }
+    return q[L];
+}
+int main()
+{
+    io.read(n,s);
+    for (int i = 1; i <= n; i++)
+    {
+        int t, c;io.read(t,c);
+        sumT[i] = sumT[i - 1] + t;
+        sumC[i] = sumC[i - 1] + c;
+    }
+    int l = 1, r = 1;
+    q[1] = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        int p = search(sumT[i] + s, l, r);
+        f[i] = f[p] - (s + sumT[i]) * sumC[p] + sumT[i] * sumC[i] + s * sumC[n];
+        while (l < r && (f[q[r]] - f[q[r - 1]]) * (sumC[i] - sumC[q[r]]) >= (f[i] - f[q[r]]) * (sumC[q[r]] - sumC[q[r - 1]]))
+            r--;
+        q[++r] = i;
+    }
+    io.write(f[n]);
     io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
     return 0;
 }

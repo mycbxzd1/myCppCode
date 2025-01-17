@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
+typedef long long ll;
 class IO {
 private:
     void _read(int &x) {
@@ -47,6 +47,11 @@ private:
         while(*s) putchar(*s++);
     }
 
+    template<typename T>
+    void _write(const T &x) {
+        cout<<x;
+    }
+
 public:
     IO(){
         ios::sync_with_stdio(false);
@@ -80,36 +85,33 @@ public:
         putchar('\n');
     }
 } io;
-
-
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
+const int N=3e4+5,P=1e6+5,S=2e5+5,INF=0x3f3f3f3f;
+int n,m=P*2ms,L[N],R[N],id[S<<2];
+ll f[N][2];
+int change(int p,int l,int r,int x,int y,int v){
+    if(x<=l&&r<=y){
+        id[p]=v;
+        return;
+    }
+    int mid=(l+r)>>1;
+    if(x<=mid) change(p<<1,l,mid,x,y,v);
+    if(mid<y) change(p<<1|1,mid+1,r,x,y,v);
+}
+int query(int p,int l,int r,int x){
+    if(l==r) return id[p];
+    int mid=l+r>>1;
+    if(x<mid)return max(id[p],query(p<<1,l,mid,x))
+    else return max(id[p],query(p<<1|1,mid+1,r,x));
+}
+int main(){
+    io.read(n,s);s+=P;
+    L[0]=R[0]=P;
+    for(itn i=;i<=n;i++){
+        io.read(L[i],R[i]);
+        L[i]+=P,R[i]+=P;
+        int l=query(1,1,m,L[i]);
+        int r=query(1,1,m,R[i]);
+        f[i][0]
+    }
     return 0;
 }

@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
 class IO {
 private:
     void _read(int &x) {
@@ -47,6 +46,11 @@ private:
         while(*s) putchar(*s++);
     }
 
+    template<typename T>
+    void _write(const T &x) {
+        cout<<x;
+    }
+
 public:
     IO(){
         ios::sync_with_stdio(false);
@@ -80,36 +84,32 @@ public:
         putchar('\n');
     }
 } io;
-
-
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
-    return 0;
+struct rec{ int L, P, S; } a[110];
+int n, m;
+int f[110][16010], q[16010];
+bool operator <(rec a, rec b) {
+	return a.S < b.S;
+}
+int calculate(int i, int k) {
+	return f[i - 1][k] - a[i].P * k;
+}
+int main()  {
+	io.read(n, m);
+	for (int i = 1; i <= m; i++)io.read(a[i].L, a[i].P, a[i].S);
+	sort(a + 1, a + m + 1);
+	for (int i = 1; i <= m; i++) {
+		int l = 1, r = 0;
+		for (int k = max(0, a[i].S - a[i].L); k <= a[i].S - 1; k++) {
+			while (l <= r && calculate(i, q[r]) <= calculate(i, k)) r--;
+			q[++r] = k;
+		}
+		for (int j = 1; j <= n; j++) {
+			f[i][j] = max(f[i - 1][j], f[i][j - 1]);
+			if (j >= a[i].S) {
+				while (l <= r && q[l] < j - a[i].L) l++;
+				if (l <= r) f[i][j] = max(f[i][j], calculate(i, q[l]) + a[i].P * j);
+			}
+		}
+	}
+	cout << f[m][n] << endl;
 }

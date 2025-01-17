@@ -1,5 +1,6 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
 class IO {
 private:
@@ -80,36 +81,41 @@ public:
         putchar('\n');
     }
 } io;
-
-
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
+const int N=1e8+5,INF=0x3f3f3f3f;
+vector<int> pri;
+bool not_prime[N];
+int n;
+void pre() {
+    for (int i = 2; i <= n; ++i) {
+        if (!not_prime[i])pri.push_back(i);
+        for (int pri_j : pri) {
+            if (i * pri_j > n) break;
+            not_prime[i * pri_j] = true;
+            if (i % pri_j == 0)break;
+        }
+    }
+}
+/*
+bool f[N];int prime[N],n;*/
+/*void calc(){
+    memset(f,0,sizeof(f));
+    f[0]=f[1]=1;
+    int cnt=0;
+    for(int i=2;i<=n;i++){
+        if(!f[i])prime[++cnt]=i;
+        for(int j=1;j<=cnt&&prime[j]*i<=n;j++){
+            f[prime[j]*i]=1;
+            if(i%prime[j]==0)break;
+        }
+    }
+}*/
+int main(){
+    int q;io.read(n,q);
+    pre();
+    while(q--){
+        int x;io.read(x);
+        io.write(pri[x-1]);
+        io.newline();
+    }
     return 0;
 }

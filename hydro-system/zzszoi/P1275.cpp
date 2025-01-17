@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
 class IO {
 private:
     void _read(int &x) {
@@ -47,6 +46,11 @@ private:
         while(*s) putchar(*s++);
     }
 
+    template<typename T>
+    void _write(const T &x) {
+        cout<<x;
+    }
+
 public:
     IO(){
         ios::sync_with_stdio(false);
@@ -80,36 +84,32 @@ public:
         putchar('\n');
     }
 } io;
-
-
+int n, a[100010], c[100010], q[100010];
+long long m, f[100010];
+multiset<long long> s;
 int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
-    return 0;
+	io.read(n, m);
+	for (int i = 1; i <= n; i++) {
+		io.read(a[i]);
+		if (a[i] > m) {
+			io.write("-1");
+			return 0;
+		}
+	}
+	long long sum = 0;
+	for (int i = 1, j = 0; i <= n; i++) {
+		sum += a[i];
+		while (sum > m) sum -= a[j + 1], j++;
+		c[i] = j;
+	}
+	int l = 1, r = 0;
+	for (int i = 1; i <= n; i++) {
+		while (l <= r && q[l] <= c[i])s.erase(f[q[l]] + a[q[l + 1]]),l++;
+		while (l <= r && a[q[r]] <= a[i])s.erase(f[q[r - 1]] + a[q[r]]),r--;
+		if (l <= r) s.insert(f[q[r]] + a[i]);
+		q[++r] = i;
+		f[i] = f[c[i]] + a[q[l]];
+		if (!s.empty()) f[i] = min(f[i], *s.begin());
+	}
+	io.write(f[n],"\n");
 }

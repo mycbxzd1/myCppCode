@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+const int maxT = 4000105;
 
+int n, m, t, ti, ans = 1e9, l = 1, r, cnt[maxT], sum[maxT], q[maxT], f[maxT];
 class IO {
 private:
     void _read(int &x) {
@@ -80,36 +82,25 @@ public:
         putchar('\n');
     }
 } io;
+double getSlope(int u, int v) { 
+    return (double)(f[v] + sum[v] - f[u] - sum[u]) / (cnt[u] == cnt[v] ? 1e-9 : cnt[v] - cnt[u]); 
+}
 
-
-int main() {
-    IO io;
-
-    // 测试整数
-    int n;
-    io.read(n);
-    io.write(n);
-    io.newline();
-
-    // 测试浮点数（动态精度传参）
-    double d;
-    io.read(d);
-    io.write(d, 2); // 输出2位小数
-    io.newline();
-    io.write(d, 4); // 输出4位小数
-    io.newline();
-
-    // 测试字符串
-    string s;
-    io.read(s);
-    io.write(s);
-    io.newline();
-
-    // 测试容器
-    vector<int> v;
-    io.read(v, n); // 读取n个元素
-    io.write(v);
-    io.newline();
-
+int main()
+{
+    io.read(n, m);
+    for (int i = 1; i <= n; i++)io.read(ti),t = max(t, ti),cnt[ti]++,sum[ti] += ti;
+    for (int i = 1; i < t + m; i++)cnt[i] += cnt[i - 1],sum[i] += sum[i - 1];
+    for (int i = 0; i < t + m; i++){
+        if (i - m >= 0){
+            while (l < r && getSlope(q[r - 1], q[r]) >= getSlope(q[r], i - m))r--;
+            q[++r] = i - m;
+        }
+        while (l < r && getSlope(q[l], q[l + 1]) <= i)l++;
+        f[i] = cnt[i] * i - sum[i];
+        if (l <= r)f[i] = min(f[i], f[q[l]] + (cnt[i] - cnt[q[l]]) * i - (sum[i] - sum[q[l]]));
+    }
+    for (int i = t; i < t + m; i++)ans = min(ans, f[i]);
+    cout<<ans<<endl;
     return 0;
 }
