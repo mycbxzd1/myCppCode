@@ -1,32 +1,137 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-const int N=1e4+5,INF=0x3f3f3f3f;
-int prime[N],cnt,phi[N];
-bool f[N];
-void calc(int n){
-    memset(f,0,sizeof(f));
-    f[0]=f[1]=1;
-    for(int i=2;i<=n;i++){
-        if(!f[i])prime[++cnt]=i,phi[i]=i-1;
-        for(int j=1;j<=cnt&&prime[j]*i<=n;j++){
-            f[prime[j]*i]=1;
-            if(i%prime[j])phi[prime[j]*i]=phi[i]*(prime[j]-1);
-            else{
-                phi[prime[j]*i]=phi[i]*prime[j];
-                break;
-            }
+class IO
+{
+private:
+    void _read(int &x)
+    {
+        x = 0;
+        char ch = getchar();
+        bool f = 0;
+        while (ch < '0' || ch > '9')
+        {
+            if (ch == '-')
+                f = 1;
+            ch = getchar();
+        }
+        while (ch >= '0' && ch <= '9')
+        {
+            x = (x << 3) + (x << 1) + (ch ^ 48);
+            ch = getchar();
+        }
+        if (f)
+            x = -x;
+    }
+    void _read(long long &x)
+    {
+        x = 0;
+        char ch = getchar();
+        bool f = 0;
+        while (ch < '0' || ch > '9')
+        {
+            if (ch == '-')
+                f = 1;
+            ch = getchar();
+        }
+        while (ch >= '0' && ch <= '9')
+        {
+            x = (x << 3) + (x << 1) + (ch ^ 48);
+            ch = getchar();
+        }
+        if (f)
+            x = -x;
+    }
+
+    void _read(char &x)
+    {
+        do
+        {
+            x = getchar();
+        } while (isspace(x));
+    }
+
+    void _read(string &x)
+    {
+        x.clear();
+        char ch;
+        do
+        {
+            ch = getchar();
+        } while (isspace(ch));
+        while (!isspace(ch) && ch != EOF)
+        {
+            x.push_back(ch);
+            ch = getchar();
         }
     }
-}
-int main(){
-    calc(1200);
-    int T=1;//cin>>T;
-    for(int i=1;i<=T;i++){
-        int n,ans=0;cin>>n;
-        for(int j=1;j<=n;j++)ans+=phi[j];
-        if(n==1)cout<<0<<endl;
-        else cout<<(ans<<1|1)<<"\n";
+
+    void _write(int x)
+    {
+        if (x < 0)
+        {
+            putchar('-');
+            x = -x;
+        }
+        if (x >= 10)
+            _write(x / 10);
+        putchar(x % 10 + '0');
     }
+
+    void _write(const char *s)
+    {
+        while (*s)
+            putchar(*s++);
+    }
+
+public:
+    IO()
+    {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+    }
+
+    // 提供统一的 read 接口
+    template <typename T>
+    void read(T &x)
+    {
+        _read(x);
+    }
+
+    template <typename T, typename... Args>
+    void read(T &x, Args &...args)
+    {
+        _read(x);
+        read(args...);
+    }
+
+    template <typename T>
+    void write(const T &x)
+    {
+        _write(x);
+    }
+
+    template <typename T, typename... Args>
+    void write(const T &x, const Args &...args)
+    {
+        _write(x);
+        write(args...);
+    }
+
+    void newline()
+    {
+        putchar('\n');
+    }
+} io;
+int main()
+{
+    long long n, k, ans;
+    io.read(n, k);
+    ans = n * k;
+    for (int i = 1, x; i <= n; i = x + 1)
+    {
+        x = k / i ? min(k / (k / i), n) : n;
+        ans -= (k / i) * (i + x) * (x - i + 1) / 2;
+    }
+    cout << ans << endl;
     return 0;
 }
