@@ -1,0 +1,11 @@
+{
+    "base_url": "",
+    "cookie_pool": "",
+    "proxy_pool": "",
+    "charset": "",
+    "min_length": 1,
+    "max_length": 6,
+    "max_threads": 4,
+    "max_requests_5s": 90,
+    "progress_index": 352318
+}
