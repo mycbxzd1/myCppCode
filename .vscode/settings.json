@@ -96,5 +96,6 @@
         "valarray": "cpp",
         "variant": "cpp",
         "version": "cpp"
-    }
+    },
+    "CodeGPT.apiKey": "Ollama"
 }
