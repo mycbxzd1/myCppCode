@@ -1,40 +1,61 @@
 #include <bits/stdc++.h>
-#define int long long
 using namespace std;
-const int MOD = 1e9 + 7;
-string a;
-stack<int> seq;
-int ans;
-signed main()
+const int N = 1e7 + 7;
+const int mod = 1e9 + 7;
+void add(auto &a, auto b)
+{
+    a += b;
+    if (a >= mod)
+        a -= mod;
+}
+int n, stk[N], top, match[N], a[N], b[N], up[N], ans[N];
+char s[N];
+
+int main()
 {
     freopen("bracket.in", "r", stdin);
     freopen("bracket.out", "w", stdout);
-    auto P = [=](int x)
-    {const int inv2 = (MOD + 1) / 2;x %= MOD;return 1LL * (x * ((x + 1) % MOD) % MOD) * inv2 % MOD; };
-    cin.tie(nullptr)->sync_with_stdio(false);
-    cin >> a;
-    int n = a.size();
-    vector<int> cnt(n + 1, 0), sumP(n + 1, 0);
+    cin >> s + 1;
+    n = strlen(s + 1);
+    top = 0;
     for (int i = 1; i <= n; i++)
     {
-        if (a[i - 1] == 40)
-            seq.push(i);
-        else
+        if (s[i] == '(')
         {
-            if (!seq.empty())
-            {
-                int p = seq.top();
-                seq.pop();
-                int prev = p - 1;
-                cnt[i] = 1 + (prev >= 1 ? cnt[prev] : 0);
-                if (cnt[i] >= MOD)
-                    cnt[i] -= MOD;
-                sumP[i] = (P(prev) + (prev >= 1 ? sumP[prev] : 0)) % MOD;
-                int contrib = (cnt[i] * P(i) % MOD - sumP[i] + MOD) % MOD;
-                ans = ans + contrib;
-            }
+            up[i] = stk[top];
+            stk[++top] = i;
+        }
+        else if (top)
+        {
+            match[i] = stk[top];
+            match[stk[top]] = i;
+            top--;
         }
     }
-    cout << ans << "\n";
+    for (int i = 1; i <= n; i++)
+    {
+        if (!match[i] || s[i] == '(')
+            continue;
+        b[i] = b[match[i] - 1] + 1;
+    }
+    for (int i = n; i >= 1; i--)
+    {
+        if (!match[i] || s[i] == ')')
+            continue;
+        a[i] = a[match[i] + 1] + 1;
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        if (!match[i] || s[i] == ')')
+            continue;
+        ans[i] = 1LL * a[i] * b[match[i]] % mod;
+        if (up[i])
+            add(ans[i], ans[up[i]]);
+        ans[match[i]] = ans[i];
+    }
+    long long ret = 0;
+    for (int i = 1; i <= n; i++)
+        ret += 1LL * ans[i] * i % mod;
+    cout << ret << endl;
     return 0;
 }

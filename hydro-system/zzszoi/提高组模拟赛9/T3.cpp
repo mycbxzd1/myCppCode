@@ -14,8 +14,7 @@ int main()
     freopen("matrix.out", "w", stdout);
     cin.tie(nullptr)->sync_with_stdio(false);
     int n, m, K;
-    if (!(cin >> n >> m >> K))
-        return 0;
+    cin >> n >> m >> K;
     vector<string> a(n);
     for (auto &s : a)
         cin >> s;
@@ -47,13 +46,10 @@ int main()
             }
             else
                 ng[j] = 0;
-            
         }
         f.swap(nf);
         g.swap(ng);
     }
-
-    /* Σ f - Σ g 即互异新矩阵总数 */
     long long ans = 0;
     for (int j = 0; j < m; ++j)
     {
