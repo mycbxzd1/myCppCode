@@ -7,6 +7,7 @@ struct TriEvent
     int type;
     int id;
 };
+
 int main()
 {
     cin.tie(nullptr)->sync_with_stdio(false);
