@@ -1,0 +1,49 @@
+2025-07-25 12:02:07 [INFO] 开始清理：根目录 = E:\Github\myCppCode
+2025-07-25 12:02:07 [ERROR] 删除失败: clean_temp_files.log，错误: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'clean_temp_files.log'
+2025-07-25 12:02:09 [INFO] 已删除: deltmp.py
+2025-07-25 12:02:13 [INFO] 已删除: exui\CExui_test.cpp
+2025-07-25 12:02:13 [INFO] 已删除: exui\CExui_test.sln
+2025-07-25 12:02:13 [INFO] 已删除: exui\CExui_test.vcxproj
+2025-07-25 12:02:13 [INFO] 已删除: exui\CExui_test.vcxproj.filters
+2025-07-25 12:02:13 [INFO] 已删除: exui\CExui_test.vcxproj.user
+2025-07-25 12:02:14 [INFO] 已删除: hydro-system\zzszoi\template.cpp
+2025-07-25 12:02:14 [INFO] 已删除: hydro-system\zzszoi\test.cpp
+2025-07-25 12:02:15 [INFO] 已删除: hydro-system\zzszoi\提高组模拟赛9\test.cpp
+2025-07-25 12:02:15 [INFO] 已删除: hydro-system\zzszoi\普及组全真模拟3\test.cpp
+2025-07-25 12:02:15 [INFO] 已删除: hydro-system\zzszoi\普及组全真模拟3\test.exe
+2025-07-25 12:02:15 [INFO] 已删除: luogu\FCRT1\tmp.cpp
+2025-07-25 12:02:15 [INFO] 已删除: luogu\平衡树\tempCodeRunnerFile.cpp
+2025-07-25 12:02:15 [INFO] 已删除: luogu\平衡树\tempCodeRunnerFile.exe
+2025-07-25 12:02:15 [INFO] 已删除: other-system\上海计算机学会\test.cpp
+2025-07-25 12:02:15 [INFO] 已删除: other-system\上海计算机学会\test.exe
+2025-07-25 12:02:15 [INFO] === 清理完成 ===
+2025-07-25 12:02:15 [INFO] 总扫描文件: 1085
+2025-07-25 12:02:15 [INFO] 总删除文件: 16
+2025-07-25 12:02:15 [INFO] 删除失败数: 1
+2025-07-25 12:02:15 [INFO] 耗时: 0:00:07.901096
+2025-07-25 12:03:30 [INFO] 开始清理：根目录 = E:\Github\myCppCode
+2025-07-25 12:03:30 [WARNING] 删除权限不足: clean_temp_files.log
+2025-07-25 12:03:33 [ERROR] 解除只读后删除仍失败: clean_temp_files.log，错误: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'clean_temp_files.log'
+2025-07-25 12:03:35 [INFO] === 清理完成 ===
+2025-07-25 12:03:35 [INFO] 总扫描文件: 1069
+2025-07-25 12:03:35 [INFO] 总删除文件: 0
+2025-07-25 12:03:35 [INFO] 删除失败数: 1
+2025-07-25 12:03:35 [INFO] 耗时: 0:00:04.899260
+2025-07-25 12:04:46 [INFO] 开始清理：根目录 = E:\Github\myCppCode
+2025-07-25 12:04:46 [INFO] === 清理完成 ===
+2025-07-25 12:04:48 [INFO] 总扫描文件: 1068
+2025-07-25 12:04:48 [INFO] 总删除文件: 0
+2025-07-25 12:04:48 [INFO] 失败数: 0
+2025-07-25 12:04:48 [INFO] 耗时: 0:00:00.768544
+2025-07-25 14:38:06 [INFO] 开始清理：根目录 = E:\Github\myCppCode
+2025-07-25 14:38:07 [INFO] === 清理完成 ===
+2025-07-25 14:38:07 [INFO] 总扫描文件: 1068
+2025-07-25 14:38:07 [INFO] 总删除文件: 0
+2025-07-25 14:38:07 [INFO] 失败数: 0
+2025-07-25 14:38:07 [INFO] 耗时: 0:00:01.073347
+2025-07-25 14:41:52 [INFO] 开始清理：根目录 = E:\Github\myCppCode
+2025-07-25 14:41:53 [INFO] === 清理完成 ===
+2025-07-25 14:41:53 [INFO] 总扫描文件: 1056
+2025-07-25 14:41:53 [INFO] 总删除文件: 0
+2025-07-25 14:41:53 [INFO] 失败数: 0
+2025-07-25 14:41:53 [INFO] 耗时: 0:00:00.841764
