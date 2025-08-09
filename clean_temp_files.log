@@ -47,3 +47,18 @@
 2025-07-25 14:41:53 [INFO] 总删除文件: 0
 2025-07-25 14:41:53 [INFO] 失败数: 0
 2025-07-25 14:41:53 [INFO] 耗时: 0:00:00.841764
+2025-07-25 16:39:48 [INFO] 开始清理：根目录 = E:\Github\myCppCode
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\temp_clf.pkl
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\train_temp_classifier.py
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\exui\CExui_test.cpp
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\exui\CExui_test.sln
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\exui\CExui_test.vcxproj
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\exui\CExui_test.vcxproj.filters
+2025-07-25 16:39:48 [INFO] 已删除: E:\Github\myCppCode\exui\CExui_test.vcxproj.user
+2025-07-25 16:39:49 [INFO] 已删除: E:\Github\myCppCode\luogu\tmp.txt
+2025-07-25 16:39:49 [INFO] 已删除: E:\Github\myCppCode\other-system\xmoj\2025年5月月赛\difficulty.out
+2025-07-25 16:39:49 [INFO] === 清理完成 ===
+2025-07-25 16:39:49 [INFO] 总扫描文件: 1124
+2025-07-25 16:39:49 [INFO] 总删除文件: 9
+2025-07-25 16:39:49 [INFO] 失败数: 0
+2025-07-25 16:39:49 [INFO] 耗时: 0:00:01.514243
